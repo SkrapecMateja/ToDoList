@@ -6,6 +6,10 @@ import PrimaryButton from "../../common/PrimaryButton/PrimaryButton";
 import TextField from "../../common/TextField/TextField";
 
 class LoginScreen extends Component {
+  static navigationOptions = {
+    title: "Log in"
+  };
+
   constructor(props) {
     super(props);
 

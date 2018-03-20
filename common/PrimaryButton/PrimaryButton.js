@@ -25,7 +25,12 @@ class PrimaryButton extends Component {
 
 PrimaryButton.propTypes = {
   onPress: PropTypes.func.isRequired,
-  text: PropTypes.string.isRequired
+  text: PropTypes.string.isRequired,
+  style: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.number,
+    PropTypes.array
+  ])
 };
 
 export default PrimaryButton;

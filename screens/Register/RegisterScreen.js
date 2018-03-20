@@ -5,6 +5,10 @@ import styles from "./RegisterScreen.styles";
 import PrimaryButton from "../../common/PrimaryButton/PrimaryButton";
 
 class RegisterScreen extends Component {
+  static navigationOptions = {
+    title: "Register"
+  };
+
   validateInputs = () => {
     if (this.validateEmail === true && this.validatePassword === true) {
       this.login;

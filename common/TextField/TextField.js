@@ -20,4 +20,12 @@ class TextField extends Component {
   }
 }
 
+TextField.propTypes = {
+  style: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.number,
+    PropTypes.array
+  ])
+};
+
 export default TextField;

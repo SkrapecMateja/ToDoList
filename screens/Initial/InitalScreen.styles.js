@@ -11,7 +11,7 @@ export default StyleSheet.create({
   welcomeText: {
     fontSize: 18,
     color: colors.textColor,
-    marginTop: 44
+    marginTop: 50
   },
   appNameText: {
     fontSize: 34,
@@ -20,10 +20,10 @@ export default StyleSheet.create({
   },
   loginButton: {
     position: "absolute",
-    bottom: 94
+    bottom: 100
   },
   registerButton: {
     position: "absolute",
-    bottom: 44
+    bottom: 50
   }
 });

@@ -5,6 +5,9 @@ import styles from "./InitalScreen.styles";
 import PrimaryButton from "../../common/PrimaryButton/PrimaryButton";
 
 class InitalScreen extends Component {
+  static navigationOptions = {
+    header: null
+  };
   openRegisterScreen = () => {
     this.props.navigation.navigate("Register");
   };
