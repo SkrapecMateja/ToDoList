@@ -6,8 +6,10 @@ target 'ToDoList' do
   # use_frameworks!
 
   # Pods for ToDoList
+
   # Required by RNFirebase
   pod 'Firebase/Core'
+  pod 'Firebase/Auth'
 
   target 'ToDoListTests' do
     inherit! :search_paths

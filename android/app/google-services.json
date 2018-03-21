@@ -40,15 +40,15 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
+              "client_id": "246563048280-gpoo8rc3vtfm6aqsiolagieagesterul.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
               "client_id": "246563048280-ot86mikjc8lkttf40q8rtt2ccjhu7qoi.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "org.reactjs.native.example.ToDoList"
               }
-            },
-            {
-              "client_id": "246563048280-gpoo8rc3vtfm6aqsiolagieagesterul.apps.googleusercontent.com",
-              "client_type": 3
             }
           ]
         },
