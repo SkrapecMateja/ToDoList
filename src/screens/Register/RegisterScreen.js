@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Button, View, Alert } from "react-native";
+import firebase from "react-native-firebase";
 
 import styles from "./RegisterScreen.styles";
 import PrimaryButton from "../../common/PrimaryButton/PrimaryButton";
@@ -10,20 +11,17 @@ class RegisterScreen extends Component {
     title: "Register"
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      email: "",
-      password: ""
-    };
-  }
+  state = {
+    email: "",
+    password: ""
+  };
 
   emailTextChanged = text => {
     this.setState({
       email: text
     });
   };
+
   passwordTextChanged = text => {
     this.setState({
       password: text
@@ -32,27 +30,23 @@ class RegisterScreen extends Component {
 
   validateInputs = () => {
     if (this.validateEmail() === true && this.validatePassword() === true) {
-      this.register;
+      this.register();
     }
   };
 
-  validateEmail = () => {
-    let email = this.state.email;
-    let emailReg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  isEmailValid = email => {
+    const emailReg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
     if (emailReg.test(email) === false) {
       Alert.alert("Email not valid", "Please enter a valid email.", [
         { text: "OK" }
       ]);
       return false;
-    } else {
-      return true;
     }
+    return true;
   };
 
-  validatePassword = () => {
-    let password = this.state.password;
-
+  isPasswordValid = password => {
     if (password.length <= 6) {
       Alert.alert(
         "Password too short",
@@ -60,12 +54,19 @@ class RegisterScreen extends Component {
         [{ text: "OK" }]
       );
       return false;
-    } else {
-      return true;
     }
+    return true;
   };
 
-  register = () => {};
+  register = async () => {
+    const { email, password } = this.state;
+    const user = await firebase
+      .auth()
+      .createUserAndRetrieveDataWithEmailAndPassword(email, password);
+    if (user) {
+      this.props.navigation.navigate("App");
+    }
+  };
 
   render() {
     return (
@@ -89,8 +90,8 @@ class RegisterScreen extends Component {
           autoCapitalize="none"
         />
         <PrimaryButton
-          text={"Register"}
-          onPress={this.validateInputs}
+          text="Register"
+          onPress={this.register}
           style={styles.registerButton}
         />
       </View>
