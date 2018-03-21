@@ -25,8 +25,8 @@ const AuthNavigation = StackNavigator(
   },
   {
     initialRouteName: "Initial",
-    /* The header config from HomeScreen is now here */
     navigationOptions: {
+      gesturesEnabled: false,
       headerStyle: {
         backgroundColor: colors.primaryColor
       },
