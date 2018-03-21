@@ -6,5 +6,14 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: colors.backgroundColor,
     alignItems: "center"
+  },
+  emailField: {
+    marginTop: 130
+  },
+  passwordField: {
+    marginTop: 24
+  },
+  registerButton: {
+    marginTop: 50
   }
 });

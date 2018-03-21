@@ -8,9 +8,11 @@ class InitalScreen extends Component {
   static navigationOptions = {
     header: null
   };
+
   openRegisterScreen = () => {
     this.props.navigation.navigate("Register");
   };
+
   openLoginScreen = () => {
     this.props.navigation.navigate("Login");
   };
@@ -18,15 +20,15 @@ class InitalScreen extends Component {
   render() {
     return (
       <View style={styles.background}>
-        <Text style={styles.welcomeText}> {"Welcome to"} </Text>
-        <Text style={styles.appNameText}> {"Donny"} </Text>
+        <Text style={styles.welcomeText}>Welcome to</Text>
+        <Text style={styles.appNameText}>Donny</Text>
         <PrimaryButton
-          text={"Log in"}
+          text="Log in"
           onPress={this.openLoginScreen}
           style={styles.loginButton}
         />
         <PrimaryButton
-          text={"Register"}
+          text="Register"
           onPress={this.openRegisterScreen}
           style={styles.registerButton}
         />

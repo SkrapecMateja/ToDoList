@@ -24,6 +24,7 @@ class LoginScreen extends Component {
       email: text
     });
   };
+
   passwordTextChanged = text => {
     this.setState({
       password: text
@@ -36,21 +37,25 @@ class LoginScreen extends Component {
     return (
       <View style={styles.background}>
         <TextField
-          placeholder={"Email"}
+          placeholder="Email"
           value={this.state.email}
           onChangeText={this.emailTextChanged}
           style={styles.emailField}
           keyboardType="email-address"
+          autoCorrect={false}
+          autoCapitalize="none"
         />
         <TextField
-          placeholder={"Password"}
+          placeholder="Password"
           value={this.state.password}
           onChangeText={this.passwordTextChanged}
           secureTextEntry={true}
           style={styles.passwordField}
+          autoCorrect={false}
+          autoCapitalize="none"
         />
         <PrimaryButton
-          text={"Log in"}
+          text="Log in"
           onPress={this.login}
           style={styles.loginButton}
         />
