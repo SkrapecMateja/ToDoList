@@ -55,6 +55,7 @@ class LoginScreen extends Component {
           keyboardType="email-address"
           autoCorrect={false}
           autoCapitalize="none"
+          autoFocus={true}
         />
         <TextField
           placeholder="Password"
@@ -70,7 +71,9 @@ class LoginScreen extends Component {
           onPress={this.login}
           style={styles.loginButton}
         />
-        {this.props.error && <Text>{this.props.error}</Text>}
+        {this.props.error && (
+          <Text style={styles.errorMsg}>{this.props.error}</Text>
+        )}
       </View>
     );
   }

@@ -15,5 +15,9 @@ export default StyleSheet.create({
   },
   registerButton: {
     marginTop: 50
+  },
+  errorMsg: {
+    color: "red",
+    marginTop: 20
   }
 });

@@ -8,7 +8,7 @@ const login = async (email, password) => {
   try {
     const user = await firebase
       .auth()
-      .signInWithEmailAndPassword(email, password);
+      .signInAndRetrieveDataWithEmailAndPassword(email, password);
     return user;
   } catch (error) {
     return null;
@@ -23,7 +23,7 @@ function* loginUser(action) {
   if (user) {
     yield put(loginUserSuccess(user));
   } else {
-    yield put(loginUserFailed("Login failed."));
+    yield put(loginUserFailed("Email and password don't match."));
   }
 }
 

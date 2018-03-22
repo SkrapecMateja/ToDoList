@@ -30,7 +30,8 @@ const AuthNavigation = StackNavigator(
       headerStyle: {
         backgroundColor: colors.primaryColor
       },
-      headerTintColor: "white"
+      headerTintColor: "white",
+      statusBarStyle: "light-content"
     }
   }
 );
@@ -56,7 +57,8 @@ const AppNavigation = StackNavigator(
       headerStyle: {
         backgroundColor: colors.primaryColor
       },
-      headerTintColor: "white"
+      headerTintColor: "white",
+      statusBarStyle: "light-content"
     }
   }
 );
