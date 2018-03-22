@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import { Button, View } from "react-native";
+import { Button, View, Text } from "react-native";
+import { connect } from "react-redux";
 
 import styles from "./LoginScreen.styles";
 import PrimaryButton from "../../common/PrimaryButton/PrimaryButton";
 import TextField from "../../common/TextField/TextField";
+import { loginUser } from "../../actions/loginActions";
 
 class LoginScreen extends Component {
   static navigationOptions = {
@@ -19,6 +21,12 @@ class LoginScreen extends Component {
     };
   }
 
+  componentWillReceiveProps = nextProps => {
+    if (nextProps.loggedInUser) {
+      this.props.navigation.navigate("App");
+    }
+  };
+
   emailTextChanged = text => {
     this.setState({
       email: text
@@ -31,7 +39,10 @@ class LoginScreen extends Component {
     });
   };
 
-  login = () => {};
+  login = () => {
+    const { email, password } = this.state;
+    this.props.loginUser(email, password);
+  };
 
   render() {
     return (
@@ -59,9 +70,15 @@ class LoginScreen extends Component {
           onPress={this.login}
           style={styles.loginButton}
         />
+        {this.props.error && <Text>{this.props.error}</Text>}
       </View>
     );
   }
 }
 
-export default LoginScreen;
+const mapStateToProps = ({ login }) => ({
+  error: login.error,
+  loggedInUser: login.loggedInUser
+});
+
+export default connect(mapStateToProps, { loginUser })(LoginScreen);

@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { Button, View, Alert } from "react-native";
-import firebase from "react-native-firebase";
+import { Button, View, Alert, Text } from "react-native";
+import { connect } from "react-redux";
 
 import styles from "./RegisterScreen.styles";
 import PrimaryButton from "../../common/PrimaryButton/PrimaryButton";
 import TextField from "../../common/TextField/TextField";
+import { registerUser } from "../../actions/registerActions";
 
 class RegisterScreen extends Component {
   static navigationOptions = {
@@ -14,6 +15,12 @@ class RegisterScreen extends Component {
   state = {
     email: "",
     password: ""
+  };
+
+  componentWillReceiveProps = nextProps => {
+    if (nextProps.loggedInUser) {
+      this.props.navigation.navigate("App");
+    }
   };
 
   emailTextChanged = text => {
@@ -58,14 +65,9 @@ class RegisterScreen extends Component {
     return true;
   };
 
-  register = async () => {
+  register = () => {
     const { email, password } = this.state;
-    const user = await firebase
-      .auth()
-      .createUserAndRetrieveDataWithEmailAndPassword(email, password);
-    if (user) {
-      this.props.navigation.navigate("App");
-    }
+    this.props.registerUser(email, password);
   };
 
   render() {
@@ -94,9 +96,15 @@ class RegisterScreen extends Component {
           onPress={this.register}
           style={styles.registerButton}
         />
+        {this.props.error && <Text>{this.props.error}</Text>}
       </View>
     );
   }
 }
 
-export default RegisterScreen;
+const mapStateToProps = ({ register }) => ({
+  error: register.error,
+  loggedInUser: register.loggedInUser
+});
+
+export default connect(mapStateToProps, { registerUser })(RegisterScreen);
