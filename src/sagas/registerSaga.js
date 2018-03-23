@@ -9,10 +9,10 @@ import {
 
 const register = async (email, password) => {
   try {
-    const user = await firebase
+    const response = await firebase
       .auth()
       .createUserAndRetrieveDataWithEmailAndPassword(email, password);
-    return user;
+    return response && response.user;
   } catch (error) {
     return null;
   }
@@ -24,7 +24,8 @@ function* registerUser(action) {
   const user = yield call(register, email, password);
 
   if (user) {
-    yield put(registerUserSuccess(user));
+    const userData = { email: user.email };
+    yield put(registerUserSuccess(userData));
   } else {
     yield put(registerUserFailed("Registration failed."));
   }

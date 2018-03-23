@@ -6,10 +6,10 @@ import { loginUserSuccess, loginUserFailed } from "../actions/loginActions";
 
 const login = async (email, password) => {
   try {
-    const user = await firebase
+    const response = await firebase
       .auth()
       .signInAndRetrieveDataWithEmailAndPassword(email, password);
-    return user;
+    return response && response.user;
   } catch (error) {
     return null;
   }
@@ -21,6 +21,7 @@ function* loginUser(action) {
   const user = yield call(login, email, password);
 
   if (user) {
+    const userData = { email: user.email };
     yield put(loginUserSuccess(user));
   } else {
     yield put(loginUserFailed("Email and password don't match."));
