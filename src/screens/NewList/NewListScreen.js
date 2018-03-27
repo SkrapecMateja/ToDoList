@@ -8,6 +8,7 @@ import HeaderButtonType from "../../common/HeaderButton/HeaderButtonType";
 import AddItemButton from "../../common/AddItemButton/AddItemButton";
 import AddItemSectionHeader from "../../common/AddItemSectionHeader/AddItemSectionHeader";
 import ChecklistItem from "../../common/ChecklistItem/ChecklistItem";
+import InvitedUsersListItem from "../../common/InvitedUsersListItem/InvitedUsersListItem";
 
 class NewListScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -115,6 +116,18 @@ class NewListScreen extends Component {
     console.log("User");
   };
 
+  deleteInvitedUser = index => {
+    console.log(index);
+    let newUsers = [
+      ...this.state.invitedUsers.slice(0, index),
+      ...this.state.invitedUsers.slice(index + 1)
+    ];
+
+    this.setState({
+      invitedUsers: newUsers
+    });
+  };
+
   //images
   pressedAddNewImage = () => {
     console.log("Image");
@@ -145,8 +158,18 @@ class NewListScreen extends Component {
                   onTextChange={this.checklistNameChanged}
                 />
               );
+            } else if (section.title === "Invited users") {
+              let invitedUsers = this.state.invitedUsers[index];
+              return (
+                <InvitedUsersListItem
+                  index={index}
+                  onDeletePressed={this.deleteInvitedUser}
+                  name={invitedUsers.name}
+                  email={invitedUsers.email}
+                />
+              );
             } else {
-              <Text>{"sad"}</Text>;
+              return <Text>{"sd"}</Text>;
             }
           }}
           renderSectionHeader={({ section }) => {

@@ -6,26 +6,17 @@ export default StyleSheet.create({
     paddingLeft: 24,
     paddingRight: 18,
     flexDirection: "row",
-    height: 33,
-    justifyContent: "space-between"
+    // height: 48,
+    justifyContent: "space-between",
+    paddingTop: 6,
+    paddingBottom: 6
   },
-  checkedWrapped: {
-    flexDirection: "row"
-  },
-  checkedButton: {
-    width: 17,
-    height: 17,
+  nameWrapped: {
     alignSelf: "center"
   },
-  checkedImage: {
-    width: 17,
-    height: 17
-  },
-  textInput: {
+  text: {
     fontSize: 14,
-    color: colors.textColor,
-    marginLeft: 10,
-    alignSelf: "center"
+    color: colors.textColor
   },
   deleteButton: {
     width: 12,
