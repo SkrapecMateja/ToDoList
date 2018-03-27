@@ -17,7 +17,7 @@ class AddItemButton extends Component {
           <Text style={styles.text}>{text}</Text>
           <TouchableHighlight
             onPress={onPress}
-            underlayColor={colors.primaryColor}
+            underlayColor={colors.clearColor}
             style={styles.addButton}
           >
             <Image source={addIcon} />

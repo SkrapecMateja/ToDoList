@@ -4,7 +4,8 @@ import colors from "../../constants/colors";
 export default StyleSheet.create({
   outerWrapperView: {
     height: 62,
-    width: Dimensions.get("window").width
+    width: Dimensions.get("window").width,
+    backgroundColor: colors.backgroundColor
   },
   lineView: {
     height: 1,

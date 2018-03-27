@@ -13,7 +13,7 @@ class AddItemButton extends Component {
     return (
       <TouchableHighlight
         onPress={onPress}
-        underlayColor={colors.primaryColor}
+        underlayColor={colors.clearColor}
         style={[styles.button, style]}
       >
         <View style={styles.wrapperView}>

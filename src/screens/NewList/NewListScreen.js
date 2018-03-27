@@ -7,6 +7,7 @@ import HeaderButton from "../../common/HeaderButton/HeaderButton";
 import HeaderButtonType from "../../common/HeaderButton/HeaderButtonType";
 import AddItemButton from "../../common/AddItemButton/AddItemButton";
 import AddItemSectionHeader from "../../common/AddItemSectionHeader/AddItemSectionHeader";
+import ChecklistItem from "../../common/ChecklistItem/ChecklistItem";
 
 class NewListScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -31,7 +32,10 @@ class NewListScreen extends Component {
     super(props);
 
     this.state = {
-      listName: ""
+      listName: "",
+      checklistItems: [],
+      invitedUsers: [],
+      images: []
     };
   }
 
@@ -51,6 +55,7 @@ class NewListScreen extends Component {
     this.props.navigation.navigate("ToDoLists");
   };
 
+  // checklist
   listNameChanged = text => {
     this.setState({
       listName: text
@@ -58,7 +63,61 @@ class NewListScreen extends Component {
   };
 
   pressedAddNewItem = () => {
-    console.log("Press");
+    let checklistItem = { checked: false, name: "" };
+    let newItems = [...this.state.checklistItems, checklistItem];
+
+    this.setState({
+      checklistItems: newItems
+    });
+  };
+
+  checkedChecklistItem = index => {
+    let item = this.state.checklistItems[index];
+    let modifieditem = { ...item, checked: !item.checked };
+    let newItems = [
+      ...this.state.checklistItems.slice(0, index),
+      modifieditem,
+      ...this.state.checklistItems.slice(index + 1)
+    ];
+
+    this.setState({
+      checklistItems: newItems
+    });
+  };
+
+  checklistNameChanged = (name, index) => {
+    let item = this.state.checklistItems[index];
+    let modifieditem = { ...item, name: name };
+    let newItems = [
+      ...this.state.checklistItems.slice(0, index),
+      modifieditem,
+      ...this.state.checklistItems.slice(index + 1)
+    ];
+
+    this.setState({
+      checklistItems: newItems
+    });
+  };
+
+  deleteChecklistItem = index => {
+    let newItems = [
+      ...this.state.checklistItems.slice(0, index),
+      ...this.state.checklistItems.slice(index + 1)
+    ];
+
+    this.setState({
+      checklistItems: newItems
+    });
+  };
+
+  //users
+  pressedAddNewUser = () => {
+    console.log("User");
+  };
+
+  //images
+  pressedAddNewImage = () => {
+    console.log("Image");
   };
 
   render() {
@@ -71,15 +130,48 @@ class NewListScreen extends Component {
           style={styles.listName}
         />
         <SectionList
-          renderItem={({ item, index, section }) => <Text>{"ListItem"}</Text>}
-          renderSectionHeader={({ section }) => (
-            //<AddItemButton onPress={this.pressedAddNewItem} />
-            <AddItemSectionHeader text={"Invited users"} />
-          )}
+          stickySectionHeadersEnabled={false}
+          style={styles.sectionList}
+          renderItem={({ item, index, section }) => {
+            if (section.title == "Add") {
+              let checklistItem = this.state.checklistItems[index];
+              return (
+                <ChecklistItem
+                  checked={checklistItem.checked}
+                  index={index}
+                  onCheckPressed={this.checkedChecklistItem}
+                  onDeletePressed={this.deleteChecklistItem}
+                  text={this.checkedChecklistItem.name}
+                  onTextChange={this.checklistNameChanged}
+                />
+              );
+            } else {
+              <Text>{"sad"}</Text>;
+            }
+          }}
+          renderSectionHeader={({ section }) => {
+            if (section.title === "Add") {
+              return <AddItemButton onPress={this.pressedAddNewItem} />;
+            } else if (section.title === "Invited users") {
+              return (
+                <AddItemSectionHeader
+                  text={section.title}
+                  onPress={this.pressedAddNewUser}
+                />
+              );
+            } else {
+              return (
+                <AddItemSectionHeader
+                  text={section.title}
+                  onPress={this.pressedAddNewImage}
+                />
+              );
+            }
+          }}
           sections={[
-            { title: "Add", data: [] },
-            { title: "Invited users", data: [] },
-            { title: "Images", data: [] }
+            { title: "Add", data: this.state.checklistItems },
+            { title: "Invited users", data: this.state.invitedUsers },
+            { title: "Images", data: this.state.images }
           ]}
         />
       </View>

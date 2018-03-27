@@ -3,7 +3,8 @@ const colors = {
   backgroundColor: "#EDEEF3",
   textColor: "#727181",
   placeholderColor: "#B5B4C1",
-  lineColor: "#D0CFD9"
+  lineColor: "#D0CFD9",
+  clearColor: "transparent"
 };
 
 export default colors;

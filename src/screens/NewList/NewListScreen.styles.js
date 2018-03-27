@@ -8,5 +8,8 @@ export default StyleSheet.create({
   },
   listName: {
     marginTop: 20
+  },
+  sectionList: {
+    marginTop: 10
   }
 });

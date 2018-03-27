@@ -8,7 +8,7 @@ class LoadingScreen extends Component {
     if (this.props.loggedInUser) {
       this.props.navigation.navigate("App");
     } else {
-      this.props.navigation.navigate("Auth");
+      this.props.navigation.navigate("App");
     }
   };
 
