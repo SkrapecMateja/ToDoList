@@ -2,7 +2,7 @@ import backIcon from "../../images/arrow-left.png";
 import closeIcon from "../../images/close.png";
 import shareIcon from "../../images/share.png";
 import saveIcon from "../../images/check.png";
-import searchIcon from "../../images/search-icon.png";
+import addIcon from "../../images/add.png";
 
 const HeaderButtonType = {
   back: {
@@ -29,10 +29,10 @@ const HeaderButtonType = {
     height: 11,
     isLeft: false
   },
-  search: {
-    imageSource: searchIcon,
-    width: 16,
-    height: 16,
+  add: {
+    imageSource: addIcon,
+    width: 17,
+    height: 17,
     isLeft: false
   }
 };
