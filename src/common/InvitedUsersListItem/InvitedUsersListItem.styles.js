@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet } from "react-native";
 import colors from "../../constants/colors";
 
 export default StyleSheet.create({
@@ -6,7 +6,6 @@ export default StyleSheet.create({
     paddingLeft: 24,
     paddingRight: 18,
     flexDirection: "row",
-    // height: 48,
     justifyContent: "space-between",
     paddingTop: 6,
     paddingBottom: 6

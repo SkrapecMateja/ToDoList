@@ -26,7 +26,7 @@ class AddItemButton extends Component {
 }
 
 AddItemButton.propTypes = {
-  onPress: PropTypes.func,
+  onPress: PropTypes.func.isRequired,
   style: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.number,

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { View, SectionList, Text } from "react-native";
 
+import ImagePicker from "react-native-image-picker";
+
 import styles from "./NewListScreen.styles";
 import ListNameTextField from "../../common/ListNameTextField/ListNameTextField";
 import HeaderButton from "../../common/HeaderButton/HeaderButton";
@@ -9,6 +11,16 @@ import AddItemButton from "../../common/AddItemButton/AddItemButton";
 import AddItemSectionHeader from "../../common/AddItemSectionHeader/AddItemSectionHeader";
 import ChecklistItem from "../../common/ChecklistItem/ChecklistItem";
 import InvitedUsersListItem from "../../common/InvitedUsersListItem/InvitedUsersListItem";
+import ImageListItem from "../../common/ImageListItem/ImageListItem";
+
+const imagePickerOptions = {
+  title: "Select Image",
+  customButtons: [],
+  storageOptions: {
+    skipBackup: true,
+    path: "images"
+  }
+};
 
 class NewListScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -29,6 +41,15 @@ class NewListScreen extends Component {
     };
   };
 
+  goBack = () => {
+    this.props.navigation.navigate("ToDoLists");
+  };
+
+  save = () => {
+    //@TODO save on backend
+    this.props.navigation.navigate("ToDoLists");
+  };
+
   constructor(props) {
     super(props);
 
@@ -47,15 +68,6 @@ class NewListScreen extends Component {
     });
   }
 
-  goBack = () => {
-    this.props.navigation.navigate("ToDoLists");
-  };
-
-  save = () => {
-    //@TODO save on backend
-    this.props.navigation.navigate("ToDoLists");
-  };
-
   // checklist
   listNameChanged = text => {
     this.setState({
@@ -65,7 +77,7 @@ class NewListScreen extends Component {
 
   pressedAddNewItem = () => {
     let checklistItem = { checked: false, name: "" };
-    let newItems = [...this.state.checklistItems, checklistItem];
+    let newItems = [checklistItem, ...this.state.checklistItems];
 
     this.setState({
       checklistItems: newItems
@@ -117,7 +129,6 @@ class NewListScreen extends Component {
   };
 
   deleteInvitedUser = index => {
-    console.log(index);
     let newUsers = [
       ...this.state.invitedUsers.slice(0, index),
       ...this.state.invitedUsers.slice(index + 1)
@@ -130,7 +141,36 @@ class NewListScreen extends Component {
 
   //images
   pressedAddNewImage = () => {
-    console.log("Image");
+    this.showImagePicker();
+  };
+
+  deleteImage = index => {
+    let newImages = [
+      ...this.state.images.slice(0, index),
+      ...this.state.images.slice(index + 1)
+    ];
+
+    this.setState({
+      images: newImages
+    });
+  };
+
+  showImagePicker = () => {
+    ImagePicker.showImagePicker(imagePickerOptions, response => {
+      if (response.didCancel) {
+        console.log("User cancelled image picker");
+      } else if (response.error) {
+        console.log("ImagePicker Error: ", response.error);
+      } else if (response.customButton) {
+        console.log("User tapped custom button: ", response.customButton);
+      } else {
+        let image = { uri: response.uri };
+        let newImages = [image, ...this.state.images];
+        this.setState({
+          images: newImages
+        });
+      }
+    });
   };
 
   render() {
@@ -169,7 +209,15 @@ class NewListScreen extends Component {
                 />
               );
             } else {
-              return <Text>{"sd"}</Text>;
+              let image = this.state.images[index];
+              console.log(image);
+              return (
+                <ImageListItem
+                  index={index}
+                  onDeletePressed={this.deleteImage}
+                  imageSource={image}
+                />
+              );
             }
           }}
           renderSectionHeader={({ section }) => {
